@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
@@ -15,25 +17,6 @@ historical_data['date'] = pd.to_datetime(historical_data['date'])
 historical_data['month'] = historical_data['date'].dt.month
 historical_data['day'] = historical_data['date'].dt.day
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error
-from sklearn.preprocessing import LabelEncoder
-from sklearn.experimental import enable_iterative_imputer
-from sklearn.impute import SimpleImputer, IterativeImputer
-
-# Load the data
-historical_data = pd.read_csv(
-    r"D:\UoR\Data_Science\predic_Comp_01\predicta-1-0-predict-the-unpredictable1_2\historical_weather.csv")
-submission_key = pd.read_csv(
-    r"D:\UoR\Data_Science\predic_Comp_01\predicta-1-0-predict-the-unpredictable1_2\submission_key.csv")
-sample_submission = pd.read_csv(
-    r"D:\UoR\Data_Science\predic_Comp_01\predicta-1-0-predict-the-unpredictable1_2\sample_submission.csv")
 
 # visualizations
 
@@ -130,6 +113,11 @@ submission_data[categorical_features] = cat_imputer.transform(submission_data[ca
 # Make predictions
 X_submit = submission_data[features]
 predictions = model.predict(X_submit)
+
+
+
+
+
 
 # Prepare submission file
 sample_submission['avg_temp_c'] = predictions
