@@ -12,6 +12,22 @@ from sklearn.pipeline import Pipeline
 data = pd.read_csv(r"daily_data.csv")
 submission_template = pd.read_csv(r"submission.csv")
 
+# figure of the distribution of the target variable
+plt.figure(figsize=(10, 6))
+sns.countplot(data['condition_text'].dropna())
+plt.title('Distribution of Weather Conditions')
+plt.xlabel('Weather Condition')
+plt.ylabel('Count')
+plt.xticks(rotation=90)
+plt.show()
+
+# figure of missing values of target variable
+plt.figure(figsize=(10, 6))
+sns.heatmap(data.isnull(), cbar=False, cmap='viridis')
+plt.title('Missing Values in Dataset')
+plt.show()
+
+
 # Preprocessing
 def preprocess_data(df):
     def time_to_minutes(time_str):
